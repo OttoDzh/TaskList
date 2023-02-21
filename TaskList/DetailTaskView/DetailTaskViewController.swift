@@ -191,6 +191,7 @@ extension DetailTaskViewController: UpdateViewDelegate {
             
             return result
         }
+
         self.detailtaskView.importantLabel.text = createCategoryInsideLabelText()
         
        

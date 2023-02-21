@@ -37,12 +37,7 @@ class FirestoreService {
         
      
         
-        //        let task = ODTask(title: title,
-        //                          description: descipt,
-        //                          id: id,
-        //                          isReady: false,
-        //                          isUrgent: isUrgent,
-        //                          isImportant: isImportant)
+
         
         let userRef = usersRef.document(Auth.auth().currentUser!.uid)
         let tasksRef = userRef.collection("tasks")

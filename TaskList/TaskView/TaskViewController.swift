@@ -88,13 +88,11 @@ class TaskViewController: UIViewController {
     func addTargets() {
         taskView.addtaskButton.addTarget(self, action: #selector(addTask), for: .touchUpInside)
         taskView.menuButton.addTarget(self, action: #selector(signOut), for: .touchUpInside)
-        taskView.uiButton.addTarget(self, action: #selector(uiButtonTapped), for: .touchUpInside)
+        
     }
     
-   @objc func uiButtonTapped() {
-        
-       
-    }
+
+     
     
     func closeSelf() {
         switch isFirst {
@@ -151,7 +149,27 @@ extension TaskViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: TableViewCell.reuseId, for: indexPath) as! TableViewCell
         cell.taskName.text = tasks[indexPath.row].title
+        
+        if tasks[indexPath.row].isImportant {
+            cell.importantOrNo.image = UIImage(systemName: "figure.run")
+            cell.importantOrNo.tintColor = .red
+        } else {
+            cell.importantOrNo.image = UIImage(systemName: "figure.walk")
+            cell.importantOrNo.tintColor = .blue
+        }
+        
+        if tasks[indexPath.row].isUrgent {
+            cell.urgentOrNo.image = UIImage(systemName: "figure.run.circle.fill")
+            cell.urgentOrNo.tintColor = .red
+        } else {
+            cell.urgentOrNo.image = UIImage(systemName: "figure.walk.circle.fill")
+            cell.urgentOrNo.tintColor = .blue
+           
+        }
+        
         cell.selectionStyle = .gray
+        
+        
         
         return cell
     }

@@ -38,6 +38,12 @@ class CreateTaskView: UIView {
         taskDecsriptTf.textColor = .black
         isImportantLabel.textColor = .white
         isUrgentLabel.textColor = .white
+       
+        let placeholderTextForName = NSAttributedString(string: "Task name",attributes: [NSAttributedString.Key.foregroundColor : UIColor.darkGray])
+        taskNameTf.attributedPlaceholder = placeholderTextForName
+        
+        let placeholderTextForDesc = NSAttributedString(string: "Task description",attributes: [NSAttributedString.Key.foregroundColor : UIColor.darkGray])
+        taskDecsriptTf.attributedPlaceholder = placeholderTextForDesc
         
     }
     
