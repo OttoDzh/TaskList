@@ -18,14 +18,7 @@ class TaskViewController: UIViewController {
     init(isFirst:Bool,userId:String) {
         self.isFirst = isFirst
         self.userId = userId
-        
         super.init(nibName: nil, bundle: nil)
-
-    
-        
-        
-       
-     
     }
     
     required init?(coder: NSCoder) {
@@ -39,22 +32,11 @@ class TaskViewController: UIViewController {
         taskView.tableView.dataSource = self
         addTargets()
         getUserData()
-     
-  
-       
-        
-
-       
     }
-    
 
-    
-
-    
     func getTasks() {
         FirestoreService.shared.getTasks(userID: userId) { result in
             switch result {
-                
             case .success(let tasks):
                 self.tasks = tasks
                 self.taskView.tableView.reloadData()
@@ -68,11 +50,9 @@ class TaskViewController: UIViewController {
         
         FirestoreService.shared.getUserData(userID: self.userId) { result in
             switch result {
-                
             case .success(let user):
                 self.user = user
                 self.getTasks()
-                
             case .failure(let error):
                 print(error.localizedDescription)
                 self.user = nil
@@ -81,22 +61,14 @@ class TaskViewController: UIViewController {
             }
         }
     }
-    
-    
- 
-    
+
     func addTargets() {
         taskView.addtaskButton.addTarget(self, action: #selector(addTask), for: .touchUpInside)
         taskView.menuButton.addTarget(self, action: #selector(signOut), for: .touchUpInside)
-        
     }
-    
 
-     
-    
     func closeSelf() {
         switch isFirst {
-            
         case true:
             let vc = AuthViewController()
             vc.modalPresentationStyle = .fullScreen
@@ -117,29 +89,19 @@ class TaskViewController: UIViewController {
         vc.modalPresentationStyle = .fullScreen
         self.present(vc, animated: true)
     }
-
 }
 
 extension TaskViewController: AddTaskDelegate {
-    
     func reloadIUI() {
         getTasks()
     }
-    
-    
 }
 
 extension TaskViewController: DataDelegate {
     func updateAfterEditing() {
         getTasks()
     }
-    
-    
 }
-
-    
-    
-
 
 extension TaskViewController: UITableViewDelegate, UITableViewDataSource {
     
@@ -164,43 +126,26 @@ extension TaskViewController: UITableViewDelegate, UITableViewDataSource {
         } else {
             cell.urgentOrNo.image = UIImage(systemName: "figure.walk.circle.fill")
             cell.urgentOrNo.tintColor = .blue
-           
         }
-        
         cell.selectionStyle = .gray
-        
-        
-        
         return cell
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { _, _, _ in
-            
-            //delete task from DB
             FirestoreService.shared.deleteTask(userId: self.userId, id: self.tasks[indexPath.row].id) { result in
                 switch result {
-                    
                 case .success(let id):
                     print("Task \(id) deleted")
                 case .failure(let error):
                     print(error.localizedDescription)
                 }
             }
-            
-            //delete task from array
             self.tasks.remove(at: indexPath.row)
-            
-            //reload table
             self.taskView.tableView.reloadData()
-            
-            print("cell deleted")
-            
         }
         let config = UISwipeActionsConfiguration(actions: [deleteAction])
         return config
-      
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -208,9 +153,5 @@ extension TaskViewController: UITableViewDelegate, UITableViewDataSource {
         vc.delegater = self
         vc.modalPresentationStyle = .fullScreen
         self.present(vc, animated: true)
-        
-    }
-    
-    
-    
+    } 
 }

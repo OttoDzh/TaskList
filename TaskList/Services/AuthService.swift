@@ -11,7 +11,6 @@ import FirebaseAuth
 class AuthService {
     var auth = Auth.auth()
     static let shared = AuthService()
-    
     var currentUser : User? {
         return auth.currentUser
     }
@@ -30,11 +29,9 @@ class AuthService {
         auth.createUser(withEmail: email,
                         password: passwd) { result, error in
             if let result = result {
-                
                 FirestoreService.shared.saveProfile(id: result.user.uid,
                                                     eMail: email) { result in
                     switch result {
-                        
                     case .success(let user):
                         completion(.success(user))
                     case .failure(let error):
@@ -42,8 +39,6 @@ class AuthService {
                         print("Oshibka zapisi v bazu")
                     }
                 }
-                
-                
             } else if let error = error {
                 completion(.failure(error))
                 print("oshibka registracii")
@@ -51,7 +46,7 @@ class AuthService {
         }
         
     }
-    
+  
     func signOut() {
         if let _ = auth.currentUser {
             try! auth.signOut()

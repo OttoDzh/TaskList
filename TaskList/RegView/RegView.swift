@@ -20,7 +20,6 @@ class RegView: UIView {
     let regButton = UIButton(title: "R E G I S T E R", bgColor: UIColor(named: "imageColor")!, textColor: .white, font: ODFonts.avenirFont, cornerRadius: 21)
     let signInButton = UIButton(title: "SIGN IN", bgColor: UIColor(named: "bgColor")!, textColor: .white, font: ODFonts.titleLabelFont, cornerRadius: 12)
 
-
     init() {
         super.init(frame: CGRect())
         setupViews()
@@ -55,32 +54,21 @@ class RegView: UIView {
         signInButton.layer.borderWidth = 4
         signInButton.layer.borderColor = CGColor.init(red: 255, green: 126, blue: 121, alpha: 1)
         taskLabel.textColor = UIColor(named: "imageColor")
-        
-    
-     
-        
-        
-     
-
-        
     }
     
     func setupConstraints() {
-        
         let stackEmailLabel = UIStackView(arrangedSubviews: [emailImage,emailLabel], axis: .horizontal, spacing: 6)
         let stackPasswordLabel = UIStackView(arrangedSubviews: [passwordImage,passwordLabel], axis: .horizontal, spacing: 6)
+        
         addSubview(taskLabel)
         addSubview(backView)
-        
         backView.addSubview(stackEmailLabel)
         backView.addSubview(stackPasswordLabel)
         backView.addSubview(emailTf)
         backView.addSubview(passwordTf)
         addSubview(regButton)
         addSubview(signInButton)
-       
-      
-        
+     
         Helper.tamicOff(views: [backView,stackEmailLabel,emailTf,stackPasswordLabel,passwordTf,regButton,signInButton,taskLabel])
         
         NSLayoutConstraint.activate([backView.centerXAnchor.constraint(equalTo: centerXAnchor),
@@ -110,10 +98,7 @@ class RegView: UIView {
         NSLayoutConstraint.activate([taskLabel.topAnchor.constraint(equalTo: topAnchor, constant: 96),
                                      taskLabel.centerXAnchor.constraint(equalTo: centerXAnchor)])
     }
-    
-    
 }
-
 
 extension UITextField {
     internal func adSBottomBorder(height: CGFloat = 1.0, color: UIColor = .white) {

@@ -20,7 +20,6 @@ class AuthView: UIView {
     let loginButton = UIButton(title: "L O G I N", bgColor: UIColor(named: "imageColor")!, textColor: .white, font: ODFonts.avenirFont, cornerRadius: 21)
     let signUpButton = UIButton(title: "SIGN UP", bgColor: UIColor(named: "bgColor")!, textColor: .white, font: ODFonts.titleLabelFont, cornerRadius: 12)
 
-
     init() {
         super.init(frame: CGRect())
         setupViews()
@@ -54,33 +53,22 @@ class AuthView: UIView {
         emailTf.autocapitalizationType = .none
         passwordTf.autocapitalizationType = .none
         passwordTf.isSecureTextEntry = true
-        
-        
-    
-     
-        
-        
-     
-
-        
     }
     
     func setupConstraints() {
         
         let stackEmailLabel = UIStackView(arrangedSubviews: [emailImage,emailLabel], axis: .horizontal, spacing: 6)
         let stackPasswordLabel = UIStackView(arrangedSubviews: [passwordImage,passwordLabel], axis: .horizontal, spacing: 6)
+       
         addSubview(taskLabel)
         addSubview(backView)
-        
         backView.addSubview(stackEmailLabel)
         backView.addSubview(stackPasswordLabel)
         backView.addSubview(emailTf)
         backView.addSubview(passwordTf)
         addSubview(loginButton)
         addSubview(signUpButton)
-       
-      
-        
+   
         Helper.tamicOff(views: [backView,stackEmailLabel,emailTf,stackPasswordLabel,passwordTf,loginButton,signUpButton,taskLabel])
         
         NSLayoutConstraint.activate([backView.centerXAnchor.constraint(equalTo: centerXAnchor),
@@ -110,10 +98,7 @@ class AuthView: UIView {
         NSLayoutConstraint.activate([taskLabel.topAnchor.constraint(equalTo: topAnchor, constant: 96),
                                      taskLabel.centerXAnchor.constraint(equalTo: centerXAnchor)])
     }
-    
-    
 }
-
 
 extension UITextField {
     internal func addBottomBorder(height: CGFloat = 1.0, color: UIColor = .lightGray) {

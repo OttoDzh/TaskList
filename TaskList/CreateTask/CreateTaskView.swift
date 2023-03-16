@@ -19,15 +19,11 @@ class CreateTaskView: UIView {
     let cancelButton = UIButton(title: "Cancel", bgColor: UIColor(named: "imageColor")!, textColor: .white, font: ODFonts.avenirFont, cornerRadius: 15)
     let saveButton = UIButton(title: "Save", bgColor: UIColor(named: "imageColor")!, textColor: .white, font: ODFonts.avenirFont, cornerRadius: 15)
     
-    
-
     init() {
         super.init(frame: CGRect())
         setupViews()
         setupConstraints()
-        
     }
-    
     
     func setupViews() {
         backgroundColor = UIColor(named: "bgColor")
@@ -38,23 +34,18 @@ class CreateTaskView: UIView {
         taskDecsriptTf.textColor = .black
         isImportantLabel.textColor = .white
         isUrgentLabel.textColor = .white
-       
         let placeholderTextForName = NSAttributedString(string: "Task name",attributes: [NSAttributedString.Key.foregroundColor : UIColor.darkGray])
         taskNameTf.attributedPlaceholder = placeholderTextForName
-        
         let placeholderTextForDesc = NSAttributedString(string: "Task description",attributes: [NSAttributedString.Key.foregroundColor : UIColor.darkGray])
         taskDecsriptTf.attributedPlaceholder = placeholderTextForDesc
-        
     }
     
     func setupConstraints() {
-        
         let stackTf = UIStackView(arrangedSubviews: [taskNameTf,taskDecsriptTf], axis: .vertical, spacing: 6)
         let isImportantStack = UIStackView(arrangedSubviews: [isImportant,isImportantLabel], axis: .vertical, spacing: 3)
         let isUrgentStack = UIStackView(arrangedSubviews: [isUrgent,isUrgentLabel], axis: .vertical, spacing: 3)
         let switchStack = UIStackView(arrangedSubviews: [isImportantStack,isUrgentStack], axis: .horizontal, spacing: 16)
         let buttonStack = UIStackView(arrangedSubviews: [cancelButton,saveButton], axis: .horizontal, spacing: 15)
-        
         addSubview(addTaskLabel)
         addSubview(stackTf)
         addSubview(switchStack)
@@ -81,8 +72,6 @@ class CreateTaskView: UIView {
                                      cancelButton.heightAnchor.constraint(equalToConstant: 48),
                                      saveButton.heightAnchor.constraint(equalToConstant: 48),
                                      saveButton.widthAnchor.constraint(equalTo: cancelButton.widthAnchor)])
-        
-        
     }
     
     required init?(coder: NSCoder) {

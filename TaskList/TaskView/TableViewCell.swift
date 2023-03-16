@@ -14,23 +14,16 @@ class TableViewCell: UITableViewCell {
     let importantOrNo = UIImageView(image: UIImage(systemName: "figure.walk"))
     let urgentOrNo = UIImageView(image: UIImage(systemName: "hourglass"))
 
-    
-
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: TableViewCell.reuseId)
-        
         backgroundColor = UIColor(named: "imageColor")!
-        
-        
         taskName.textColor = .white
         addSubview(taskName)
         addSubview(importantOrNo)
         addSubview(urgentOrNo)
+       
         Helper.tamicOff(views: [taskName,importantOrNo,urgentOrNo])
-        
-      
-        
-        
+
         NSLayoutConstraint.activate([taskName.centerXAnchor.constraint(equalTo: centerXAnchor),
                                      taskName.centerYAnchor.constraint(equalTo: centerYAnchor),
                                      taskName.heightAnchor.constraint(equalToConstant: 40)])
@@ -43,9 +36,6 @@ class TableViewCell: UITableViewCell {
                                      importantOrNo.heightAnchor.constraint(equalToConstant: 25),
                                      urgentOrNo.widthAnchor.constraint(equalToConstant: 25),
                                      urgentOrNo.heightAnchor.constraint(equalToConstant: 25)])
-        
-        
-        
     }
     
     required init?(coder: NSCoder) {

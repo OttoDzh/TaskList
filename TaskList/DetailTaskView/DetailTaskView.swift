@@ -34,9 +34,7 @@ class DetailTaskView: UIView {
     }
     
     func setupConstraints() {
-        
         let buttonStack = UIStackView(arrangedSubviews: [deleteButton,editButton], axis: .horizontal, spacing: 15)
-        
         addSubview(taskNameLabel)
         addSubview(importantLabel)
         addSubview(desciptText)

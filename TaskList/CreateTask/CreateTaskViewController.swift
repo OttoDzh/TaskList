@@ -15,20 +15,15 @@ protocol UpdateViewDelegate {
     func updateViews(taskName:String,taskDescript:String,isImportant:Bool,isUrgent:Bool)
 }
 
-
 class CreateTaskViewController: UIViewController,UITextFieldDelegate {
     let createTaskView = CreateTaskView()
     var delegate: AddTaskDelegate?
     var delegatee: UpdateViewDelegate?
-    
-    
-    
     var task: ODTask?
     
     init(task:ODTask?){
         self.task = task
         super.init(nibName: nil, bundle: nil)
-        
     }
     
     required init?(coder: NSCoder) {
@@ -51,25 +46,20 @@ class CreateTaskViewController: UIViewController,UITextFieldDelegate {
         createTaskView.addTaskLabel.text = "Edit Task"
         createTaskView.taskNameTf.text = task.title
         createTaskView.taskDecsriptTf.text = task.description
-        
         switch task.isUrgent {
-            
         case true:
             createTaskView.isUrgent.isOn = true
         case false:
             createTaskView.isUrgent.isOn = false
         }
-        
         switch task.isImportant {
-            
         case true:
             createTaskView.isImportant.isOn = true
         case false:
             createTaskView.isImportant.isOn = false
         }
     }
-    
-    
+  
     func addTargets() {
         createTaskView.saveButton.addTarget(self, action: #selector(saveTask), for: .touchUpInside)
         createTaskView.cancelButton.addTarget(self, action: #selector(dismissSelf), for: .touchUpInside)
@@ -80,35 +70,29 @@ class CreateTaskViewController: UIViewController,UITextFieldDelegate {
     }
     
     @objc func saveTask() {
-        
         let title = createTaskView.taskNameTf.text!
         let desciprtion = createTaskView.taskDecsriptTf.text!
         let isUrgent = createTaskView.isUrgent.isOn
         let isImportant = createTaskView.isImportant.isOn
-        
         var id: String? = nil
-        
         if let task = task {
             id = task.id
         }
-        
+      
         FirestoreService.shared.saveTask(id: id,
                                          title: title,
                                          descipt: desciprtion,
                                          isUrgent: isUrgent,
                                          isImportant: isImportant) { result in
             switch result {
-                
             case .success(let okString):
                 print(okString)
                 self.delegate?.reloadIUI()
                 self.delegatee?.updateViews(taskName: title,taskDescript: desciprtion,isImportant: isImportant,isUrgent: isUrgent)
                 self.dismiss(animated: true)
-                
             case .failure(let error):
                 print(error.localizedDescription)
             }
-        
         }
     }
     

@@ -8,11 +8,11 @@
 import UIKit
 
 class RegViewController: UIViewController {
-    let regView = RegView()
+    
+  let regView = RegView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         self.view = regView
         addTargets()
     }
@@ -23,15 +23,10 @@ class RegViewController: UIViewController {
     }
  
     @objc func signUp() {
-        
         AuthService.shared.signUp(email: regView.emailTf.text!,
                                   passwd: regView.passwordTf.text!) { result in
-            
-            
             switch result {
-                
             case .success(_):
-                print("Rega proshla uspeshno")
                 self.dismiss(animated: true)
             case .failure(let error):
                 print(error.localizedDescription)
@@ -43,7 +38,6 @@ class RegViewController: UIViewController {
             }
         }
     }
-    
   @objc func dismissSelf() {
         dismiss(animated: true)
     }

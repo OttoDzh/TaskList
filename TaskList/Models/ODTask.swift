@@ -9,9 +9,6 @@ import Foundation
 import FirebaseFirestore
 
 struct ODTask {
-    
-    
-    
     var title: String
     var description: String
     var id: String
@@ -29,9 +26,7 @@ struct ODTask {
     }
     
     init?(snap:DocumentSnapshot) {
-        
         guard let data = snap.data() else {return nil}
-        
         guard let id = data["id"] as? String else { return nil }
         guard let title = data["title"] as? String else { return nil }
         guard let description = data["description"] as? String else { return nil }
@@ -45,7 +40,5 @@ struct ODTask {
         self.isReady = isReady
         self.isUrgent = isUrgent
         self.isImportant = isImportant
-        
     }
-    
 }
